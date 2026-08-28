@@ -20,7 +20,25 @@
     </head>
 
     <body style="background-color: #404040;">
+     <style>
+    .glow-icon {
+        position: relative;width: 200px;
+        height: 200px;transform: translateX(21px);
+    }
 
+    .glow-icon .main,
+    .glow-icon .glow {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        left: 0;
+        top: 10px;
+    }
+    .glow-icon:hover .glow 
+    {animation: glowPulse 2s infinite ease-in-out;}
+    @keyframes glowPulse 
+    {0%, 100% {opacity: 0.2;} 50% {opacity: 1;}}
+    </style>
         <div class="row">
             <div class="image-container" id="planetIcon">
               
@@ -284,11 +302,14 @@
     dur="3.5s"
     repeatCount="1"
     begin="indefinite"
-    path="M0,0 Q35,10 70,0 Q105,12 140,0 Q150,-10 190,-30 ">
+    path="M0,0 Q35,10 70,0 Q105,12 140,-5 Q150,-12 168,-22 ">
     </animateMotion>
   </g>
 </svg>           </div>
-            <div class="image-container"><img id="img2" src="img/tri.png" height="200" width="200"/></div>
+            <div class="image-container glow-icon">
+               <img src="img/ufo.svg" class="main">
+               <img src="img/glow.png" class="glow">
+             </div>
             <div class="image-container"><img id="img3" src="img/squ.png" height="200" width="200"/></div>
         </div>
 
