@@ -626,7 +626,7 @@
             <div class="image-container sound-icon" id="satelliteBox">
              <img id="glow2" src="img/glow2.png" height="200" width="200"/>
              <img id="satellite" src="img/sat.png" height="200" width="200"/>
-             <audio src="sound/img3.mp3" controls></audio>
+             <audio src="sound/img3.mp3"></audio>
             </div>
         </div>
 
@@ -693,12 +693,13 @@ soundIcons.forEach(icon => {
         sound.currentTime = 0;
         sound.play();
     });
-
-    icon.addEventListener("mouseleave", () => {
-        sound.pause();
-        sound.currentTime = 0;
+    icon.addEventListener("mouseenter", () => {
+    sound.currentTime = 0;
+    sound.play().catch(error => {
+        console.log("Audio failed:", error);
     });
 });
+
 </script>
         
     </body>
