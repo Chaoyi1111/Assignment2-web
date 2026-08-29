@@ -23,16 +23,16 @@
      <style>
     .glow-icon {
         position: relative;width: 200px;
-        height: 200px;transform: translateX(21px);
+        height: 200px;transform: translateX(20px);
     }
 
     .glow-icon .main,
     .glow-icon .glow {
         position: absolute;
-        width: 220px;
-        height: 220px;
-        left: 0;
-        top: 17px;
+        width: 235px;
+        height: 235px;
+        left: -5px;
+        top: 15px;
     }
     .glow-icon:hover .glow 
     {animation: glowPulse 2s infinite ease-in-out;}
@@ -48,7 +48,6 @@
   width: 200px;
   height: 200px;top:10px;left:10px
 }
-
 #satellite,
 #glow2 {
   position: absolute;
@@ -84,7 +83,7 @@
 .rocket-container {
     position: relative;
     width: 200px;
-    height: 200px;
+    height: 200px
 }
 
 .rocket-container .rocket {
@@ -111,8 +110,6 @@
     transform-origin: center center;
     transform: scale(1);
 }
-
-/* Hover */
 .rocket-container:hover .shapes {
     animation: rocketExplode 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards;
 }
@@ -141,12 +138,12 @@
 .glasses-container {
     position: relative;
     width: 200px;
-    height: 200px;
+    height: 200px
 }
 
 .glasses-container img {
     position: absolute;
-    top: 0;
+    top: -15px;
     left: 5px;
     width: 93%;
     height: 93%;
@@ -179,6 +176,180 @@
         opacity: 0.5;
     }
 }
+
+.submarine-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: visible;
+}
+
+.submarine-container img {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 250px;height: 245px
+}
+@keyframes bubbleUp {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(6px, -18px) scale(1.1);
+        opacity: 0;
+    }
+}
+.submarine-container:hover .bubble1 {
+    animation: bubbleUp 1.5s ease-out infinite;
+}
+@keyframes bubbleUp2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-1px, -28px) scale(1.1);
+        opacity: 0;
+    }
+}
+
+.submarine-container:hover .bubble2 {
+    animation: bubbleUp2 1.5s ease-out 0.3s infinite;
+}
+.submarine-container:hover .bubble3 {
+    animation: bubbleUp 1.5s ease-out 0.25s infinite;
+}
+.submarine-container:hover .bubble4 {
+    animation: bubbleUp 1.5s ease-out 0.55s infinite;
+}
+
+.chip-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.chip-container .chip {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 180px;
+    height: 180px;
+}
+
+.chip-path {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 180px;
+    height: 180px;
+}
+
+#chipOutline {
+    fill: none;
+    stroke: none;
+}
+
+#chipLight {
+    fill: none;
+    stroke: #fff36a;
+    stroke-width: 3;
+    stroke-linecap: round;
+
+    filter:
+        drop-shadow(0 0 2px #fff36a)
+        drop-shadow(0 0 4px #ffd900);
+
+    opacity: 0;
+}
+
+.chip-container:hover #chipLight {
+    opacity: 1;
+}
+
+.robot-container{
+    position:relative;
+    width:200px;
+    height:200px;
+}
+
+.robot-body,
+.robot-eyes {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.robot-body {
+    width: 100%;left: 42px;top: 20px;
+}
+
+.robot-eyes {
+    width: 70px;
+    left: 115px;
+    top: 132px;
+}
+@keyframes blink{
+
+0%,100%{
+    transform:scaleY(1);
+}
+
+45%{
+    transform:scaleY(0.2);
+}
+
+55%{
+    transform:scaleY(0.2);
+}
+}
+.robot-container:hover .robot-eyes{
+    animation: blink .4s ease;
+  }
+
+.speech-container {
+    width: 200px;
+    height: 200px;}
+
+.speech {
+    width: 250px;
+    height: 206.6px;
+    left: 40px;
+    top: 15px;
+    display: block;
+    position: relative;
+    z-index: 10;
+    transform-origin: center center;}
+
+.speech-container:hover .speech {
+    animation: speechPop 0.6s ease-out forwards;
+}
+
+@keyframes speechPop {
+    0% {transform: scale(0.15);
+        opacity: 0;}
+
+    45% {transform: scale(1.08);
+        opacity: 1z}
+
+    65% {transform: scale(0.96);}
+
+    82% {transform: scale(1.03);}
+
+    100% {transform: scale(1);}
+}
+
     </style>
         <div class="row">
             <div class="image-container planet-container" id="planetIcon">
@@ -462,19 +633,46 @@
              <img src="img/glow3.png" class="glow">
              <img src="img/glasses.png" class="glasses">
             </div>
-
             <div class="image-container rocket-container">
               <img src="img/rocket.png" class="rocket" >
               <img src="img/shapes.png" class="shapes" >
             </div>
-            <div class="image-container"><img id="img6" src="img/sta.png" height="200" width="200"/></div>
+            <div class="image-container submarine-container">
+              <img src="img/submarine.png">
+              <img src="img/bubble1.png" class="bubble bubble1">
+              <img src="img/bubble2.png" class="bubble bubble2">
+              <img src="img/bubble3.png" class="bubble bubble3">
+              <img src="img/bubble4.png" class="bubble bubble4">
             </div>
 
         <div class="row">
-            <div class="image-container"><img id="img7" src="img/trr.png" height="200" width="200"/></div>
-            <div class="image-container"><img id="img8" src="img/sqr.png" height="200" width="200"/></div>
-            <div class="image-container"><img id="img9" src="img/her.png" height="200" width="200"/></div>
-        </div>
+            <div class="image-container chip-container"><img src="img/chip.png" class="chip">
+             <svg class="chip-path" viewBox="0 0 200 200">
+             <path id="chipLight" d="M -8 0 L 8 0">
+             <animateMotion
+                dur="3s"
+                repeatCount="indefinite"
+                rotate="auto"
+                path="
+                M 29 18
+                H 171
+                Q 183 18 183 30
+                V 171
+                Q 183 183 171 183
+                H 29
+                Q 17 183 17 171
+                V 30
+                Q 17 18 29 18
+                Z"/>
+             </path>
+        </svg></div>
+            <div class="image-container robot-container">
+ <img src="img/robot-body.svg" class="robot-body">
+ <img src="img/robot-eyes.svg" class="robot-eyes">
+</div>
+            <div class="image-container speech-container">
+    <img src="img/speech.svg" class="speech">
+</div>
         
         <script src="script.js"></script>
         <script>
