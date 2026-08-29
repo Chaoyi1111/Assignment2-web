@@ -686,17 +686,27 @@
         <script>
 const soundIcons = document.querySelectorAll(".sound-icon");
 
+let audioUnlocked = false;
+
+document.addEventListener("click", () => {
+    audioUnlocked = true;
+}, { once: true });
+
 soundIcons.forEach(icon => {
     const sound = icon.querySelector("audio");
 
     icon.addEventListener("mouseenter", () => {
+        if (!audioUnlocked) return;
+
         sound.currentTime = 0;
-        sound.play();
+        sound.play().catch(error => {
+            console.log("Audio failed:", error);
+        });
     });
-    icon.addEventListener("mouseenter", () => {
-    sound.currentTime = 0;
-    sound.play().catch(error => {
-        console.log("Audio failed:", error);
+
+    icon.addEventListener("mouseleave", () => {
+        sound.pause();
+        sound.currentTime = 0;
     });
 });
 
