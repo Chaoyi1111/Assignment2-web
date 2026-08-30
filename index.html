@@ -7,6 +7,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.0/buzz.min.js"></script>
         
         <style>
+            body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background-image: url("img/bac.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
             .row{
                 width:720px;
                 margin: 10px auto 10px auto ;
@@ -34,8 +46,9 @@
         left: -5px;
         top: 15px;
     }
-    .glow-icon:hover .glow 
-    {animation: glowPulse 2s infinite ease-in-out;}
+   body.active .glow-icon:hover .glow {
+    animation: glowPulse 2s infinite ease-in-out;
+}
     @keyframes glowPulse 
     {0%, 100% {opacity: 0.2;} 50% {opacity: 1;}}
 .planet-container svg {
@@ -63,11 +76,12 @@
 
 #satellite {
   z-index: 2;}
-#satelliteBox:hover #satellite {
-  animation: satelliteFloat 3.5s ease-in-out infinite;
+body.active #satelliteBox:hover #satellite {
+    animation: satelliteFloat 3.5s ease-in-out infinite;
 }
-#satelliteBox:hover #glow2 {
-  animation: glowEffect 3.5s ease-in-out infinite;
+
+body.active #satelliteBox:hover #glow2 {
+    animation: glowEffect 3.5s ease-in-out infinite;
 }
 @keyframes satelliteFloat {
   0% {transform: translate(-5px, -2px); }
@@ -78,6 +92,48 @@
   0% {opacity: 0.1;transform: scale(0.95);}
  50% {opacity: 0.6;transform: scale(1.05);}
 100% {opacity: 0.1;transform: scale(0.95);}
+}
+
+.glasses-container {
+    position: relative;
+    width: 200px;
+    height: 200px
+}
+
+.glasses-container img {
+    position: absolute;
+    top: -15px;
+    left: 5px;
+    width: 93%;
+    height: 93%;
+    object-fit: contain;
+}
+
+.glasses {
+    z-index: 2;
+}
+
+.glow {
+    z-index: 1;
+    opacity: 0.8;
+}
+
+body.active .glasses-container:hover .glow {
+    animation: glowEffect 2.5s ease-in-out infinite;
+}
+
+@keyframes glowEffect {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
 }
 
 .rocket-container {
@@ -110,7 +166,7 @@
     transform-origin: center center;
     transform: scale(1);
 }
-.rocket-container:hover .shapes {
+body.active .rocket-container:hover .shapes {
     animation: rocketExplode 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards;
 }
 
@@ -132,48 +188,6 @@
     100% {
         opacity: 1;
         transform: scale(1);
-    }
-}
-
-.glasses-container {
-    position: relative;
-    width: 200px;
-    height: 200px
-}
-
-.glasses-container img {
-    position: absolute;
-    top: -15px;
-    left: 5px;
-    width: 93%;
-    height: 93%;
-    object-fit: contain;
-}
-
-.glasses {
-    z-index: 2;
-}
-
-.glow {
-    z-index: 1;
-    opacity: 0.8;
-}
-
-.glasses-container:hover .glow {
-    animation: glowEffect 2.5s ease-in-out infinite;
-}
-
-@keyframes glowEffect {
-    0% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0.5;
     }
 }
 
@@ -205,9 +219,10 @@
         opacity: 0;
     }
 }
-.submarine-container:hover .bubble1 {
+body.active .submarine-container:hover .bubble1 {
     animation: bubbleUp 1.5s ease-out infinite;
 }
+
 @keyframes bubbleUp2 {
     0% {
         transform: translate(0, 0) scale(1);
@@ -224,13 +239,15 @@
     }
 }
 
-.submarine-container:hover .bubble2 {
+body.active .submarine-container:hover .bubble2 {
     animation: bubbleUp2 1.5s ease-out 0.3s infinite;
 }
-.submarine-container:hover .bubble3 {
+
+body.active .submarine-container:hover .bubble3 {
     animation: bubbleUp 1.5s ease-out 0.25s infinite;
 }
-.submarine-container:hover .bubble4 {
+
+body.active .submarine-container:hover .bubble4 {
     animation: bubbleUp 1.5s ease-out 0.55s infinite;
 }
 
@@ -274,7 +291,7 @@
     opacity: 0;
 }
 
-.chip-container:hover #chipLight {
+body.active .chip-container:hover #chipLight {
     opacity: 1;
 }
 
@@ -314,9 +331,10 @@
     transform:scaleY(0.2);
 }
 }
-.robot-container:hover .robot-eyes{
+body.active .robot-container:hover .robot-eyes {
     animation: blink .4s ease;
-  }
+}
+
 
 .speech-container {
     width: 200px;
@@ -332,7 +350,7 @@
     z-index: 10;
     transform-origin: center center;}
 
-.speech-container:hover .speech {
+body.active .speech-container:hover .speech {
     animation: speechPop 0.6s ease-out forwards;
 }
 
@@ -684,24 +702,17 @@
         
         <script src="script.js"></script>
         <script>
-const soundIcons = document.querySelectorAll(".sound-icon");
-
-let audioUnlocked = false;
-
-document.addEventListener("click", () => {
-    audioUnlocked = true;
+            document.addEventListener("click", () => {
+    document.body.classList.add("active");
 }, { once: true });
+const soundIcons = document.querySelectorAll(".sound-icon");
 
 soundIcons.forEach(icon => {
     const sound = icon.querySelector("audio");
 
     icon.addEventListener("mouseenter", () => {
-        if (!audioUnlocked) return;
-
         sound.currentTime = 0;
-        sound.play().catch(error => {
-            console.log("Audio failed:", error);
-        });
+        sound.play();
     });
 
     icon.addEventListener("mouseleave", () => {
@@ -709,7 +720,6 @@ soundIcons.forEach(icon => {
         sound.currentTime = 0;
     });
 });
-
 </script>
         
     </body>
